@@ -1,0 +1,19 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean package'
+    publishJUnitResults: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'target'
+    ArtifactName: 'maven-artifact'
+    publishLocation: 'Container'
+
