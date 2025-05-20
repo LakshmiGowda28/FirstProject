@@ -5,15 +5,16 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'clean package'
-    publishJUnitResults: true
+- script: |
+    echo "Simulated Maven Build"
+    mkdir target
+    echo "Demo Build Output" > target/app.war
+  displayName: 'Simulate Build Step'
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'target'
-    ArtifactName: 'maven-artifact'
+    ArtifactName: 'simulated-artifact'
     publishLocation: 'Container'
+
 
